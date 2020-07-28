@@ -5,10 +5,13 @@ from typing import List
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashtable = {}
         for i, num in enumerate(nums):
-            for j in range(i+1, len(nums)):
-                if nums[i] + nums[j] == target:
-                    return [i, j]
+            complement = target - num
+            if complement in hashtable:
+                return [hashtable[complement], i]
+            else:
+                hashtable[num] = i
 
 if __name__ == '__main__': 
     s = Solution()
