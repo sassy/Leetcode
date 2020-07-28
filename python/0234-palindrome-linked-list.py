@@ -5,11 +5,6 @@
 class ListNode:
     @classmethod
     def builder(cls, l):
-        # if len(l) == 1:
-        #     return ListNode(l[0])
-        # else:
-        #     val = l.pop(0)
-        #     return ListNode(val=val, next=ListNode.builder(l))
         if len(l) < 1:
             return
         prev = None
@@ -32,34 +27,36 @@ class ListNode:
 
 
 class Solution:
-    def __popList(self, head=ListNode) -> ListNode:
+    def __reverse(self, head=ListNode) -> ListNode:
+        new_head = None
         node = head
-        prev = head
-        while True:            
+        prev = None
+        while True:
+            new_head = ListNode(val=node.val)      
+            new_head.next = prev
             if node.next == None:
-                prev.next = None
-                return node
-            prev = node
+                return new_head
+            prev = new_head
             node = node.next
 
     def isPalindrome(self, head: ListNode) -> bool:
-        if head is None:
+        if head is None or head.next is None:
             return True
-        node = head
+        tail = self.__reverse(head)
         while True:
-            tail = self.__popList(node)
-            if node.val != tail.val:
+            if head.val != tail.val:
                 return False
-            if node is tail:
+            head = head.next
+            tail = tail.next
+            if head.next is None:
                 return True
-            if node.next is None:
-                return True
-            node = node.next
 
 
 if __name__ == '__main__':
     s = Solution()
     head = ListNode.builder([1,2,1])
+    print(s.isPalindrome(head))
+    head = ListNode.builder([1])
     print(s.isPalindrome(head))
     head = ListNode.builder([1,2,2,1])
     print(s.isPalindrome(head))
