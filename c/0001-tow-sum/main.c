@@ -26,8 +26,10 @@ void test1() {
     nums[0] = 2, nums[1] = 7, nums[2] = 11, nums[3]=15;
     int *size = malloc(sizeof(int));
     int *ret = twoSum(nums, 4, 9, size);
-    printf("%d, %d\n", ret[0], ret[1]);
-    free(ret);
+    if (ret != NULL) {
+        printf("%d, %d\n", ret[0], ret[1]);
+        free(ret);
+    }
     free(size);
     free(nums);
 }
@@ -37,8 +39,10 @@ void test2() {
     nums[0] = 3, nums[1] = 2, nums[2] = 3;
     int *size = malloc(sizeof(int));
     int *ret = twoSum(nums, 3, 6, size);
-    printf("%d, %d\n", ret[0], ret[1]);
-    free(ret);
+    if (ret != NULL) {
+        printf("%d, %d\n", ret[0], ret[1]);
+        free(ret);
+    }
     free(size);
     free(nums);
 }
